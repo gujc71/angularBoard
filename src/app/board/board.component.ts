@@ -1,48 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-
-class BoardVO {
-  id: number;
-  title: string;
-  writer: string;
-}
-
-var BoardList: BoardVO[] = [
-  { id: 1, title: 'Title 1', writer: 'Mr. Nice' },
-  { id: 2, title: 'Title 2', writer: 'Narco' }
-];
+import { BoardVO } from '../BoardVO';
+import { BoardService } from '../board.service';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css']
 })
+
 export class BoardComponent implements OnInit {
 
-	constructor() { }
+	constructor(private boardService: BoardService) { }
  
 	ngOnInit() {
 	}
  
-	boardlist = BoardList;
 	boardForm = new BoardVO();
+	
+	getBoardList():BoardVO[] {
+		return this.boardService.getBoardList();
+	}
 	
 	removeBoard(id: number):void {
         if (!id) return;
-        var idx = this.boardlist.findIndex(function (item) {
-            return item.id === id;
-        });
-        if (idx === -1) return;
-        this.boardlist.splice(idx, 1);
+		this.boardService.removeBoard(id);
     }
 	
 	addBoard(): void {
-        var newId = ! this.boardlist.length ? 1 : this.boardlist[this.boardlist.length - 1].id + 1;
-        
-        var newItem = {
-            id: newId,
-            title: this.boardForm.title,
-            writer: this.boardForm.writer
-        };
-        this.boardlist.push(newItem);
+		this.boardService.addBoard(this.boardForm);
     }
 }

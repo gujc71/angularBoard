@@ -10,7 +10,7 @@ Name: <input type="text" [(ngModel)]="boardForm.writer"><br/>
 		<td style="width: 70px">Name</td>
 		<td style="width: 50px"></td>
 	</tr>
-	<tr *ngFor="let item of boardlist; let inx = index">
+	<tr *ngFor="let item of getBoardList(); let inx = index">
 		<td>{{inx+1}}</td>
 		<td>{{item.title}}</td>
 		<td>{{item.writer}}</td>

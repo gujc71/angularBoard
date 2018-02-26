@@ -4,7 +4,7 @@ import { FormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
-
+import { BoardService } from './board.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { BoardComponent } from './board/board.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [BoardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
